@@ -1,0 +1,16 @@
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>inQRCode.com</title>
+<div id="qrcode"></div>
+<input id="url">
+
+<p>When you need a quick QRCode from URL. Just type inqrcode.com/ before the URL. For example: <a href="//inqrcode.com/https://makzan.net">inqrcode.com/https://makzan.net</a></p>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<script>
+var qrcode = new QRCode("qrcode");
+var url = window.location.href.replace("https://inqrcode.com/","").replace("https://www.inqrcode.com/","")
+
+qrcode.makeCode(url);
+</script>
