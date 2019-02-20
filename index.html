@@ -1,14 +1,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>inQRCode.com</title>
+<style>
+  body {
+    font-family: -apple-system,sans-serif;
+    padding: 2em;
+  }
+  img {max-width: 100%;}
+  input{padding:.5em;width:100%;}
+  #qrcode{margin-bottom:1em}
+</style>
 <div id="qrcode"></div>
 <input id="url">
 
-<p>When you need a quick QRCode from URL. Just type inqrcode.com/ before the URL. For example: <a href="//inqrcode.com/https://makzan.net">inqrcode.com/https://makzan.net</a></p>
+<p>When you need a quick QRCode from URL. Just type <code>inqrcode.com/</code> before the URL. For example: <a href="//inqrcode.com/https://makzan.net">inqrcode.com/https://makzan.net</a>.</p>
 
 <script src="//cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <script>
-  var qrcode = new QRCode("qrcode");
+  var qrcode = new QRCode("qrcode", {
+    width: 512,
+    height: 512
+  });
   var url = window.location.href.replace("https://inqrcode.com/","").replace("https://www.inqrcode.com/","").replace("https://inqrcode.netlify.com/","")
 
   qrcode.makeCode(url);
