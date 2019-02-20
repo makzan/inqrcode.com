@@ -8,9 +8,14 @@
 <script src="//cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <script>
-var qrcode = new QRCode("qrcode");
-var url = window.location.href.replace("https://inqrcode.com/","").replace("https://www.inqrcode.com/","").replace("https://inqrcode.netlify.com/","")
+  var qrcode = new QRCode("qrcode");
+  var url = window.location.href.replace("https://inqrcode.com/","").replace("https://www.inqrcode.com/","").replace("https://inqrcode.netlify.com/","")
 
-qrcode.makeCode(url);
-document.querySelector("#url").value = url;
+  qrcode.makeCode(url);
+  var input = document.querySelector("#url");
+  input.value = url;
+  input.addEventListener('change',function(){
+    location.href = "https://inqrcode.com/" + input.value;
+  });
+  
 </script>
