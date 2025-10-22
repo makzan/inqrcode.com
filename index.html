@@ -13,6 +13,12 @@
 </style>
 <div id="qrcode"></div>
 <input id="url">
+<select id="correction-level">
+  <option value="L">Low (7%)</option>
+  <option value="M" selected="selected">Medium (15%)</option>
+  <option value="Q">Quartile (25%)</option>
+  <option value="H">High (30%)</option>
+</select>
 
 <p>When you need a quick QRCode from URL. Just type <code>inqrcode.com/</code> before the URL. For example: <a href="//inqrcode.com/https://makzan.net">inqrcode.com/https://makzan.net</a>.</p>
 <hr>
@@ -21,9 +27,12 @@
 <script src="/qrcode.min.js"></script>
 
 <script>
+  var correctionLevel = document.querySelector("#correction-level");
+
   var qrcode = new QRCode("qrcode", {
     width: 512,
-    height: 512
+    height: 512,
+    correctLevel: QRCode.CorrectLevel.M
   });
   var url = window.location.href.replace("https://inqrcode.com/","").replace("https://www.inqrcode.com/","").replace("https://inqrcode.netlify.com/","")
 
@@ -32,6 +41,11 @@
   input.value = url;
   input.addEventListener('change',function(){
     location.href = "https://inqrcode.com/" + input.value;
+  });
+  correctionLevel.addEventListener('change',function(){
+    qrcode.makeCode(url, {
+      correctLevel: QRCode.CorrectLevel[correctionLevel.value]
+    });
   });
   
 </script>
