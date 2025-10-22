@@ -44,6 +44,8 @@
   });
 
   correctionLevel.addEventListener('change',function(){
+    console.log("here");
+    qrcode.clear();
     qrcode.makeCode(url, {
       correctLevel: QRCode.CorrectLevel[correctionLevel.value]*1
     });
