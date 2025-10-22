@@ -45,7 +45,7 @@
 
   correctionLevel.addEventListener('change',function(){
     qrcode.makeCode(url, {
-      correctLevel: QRCode.CorrectLevel[correctionLevel.value]
+      correctLevel: QRCode.CorrectLevel[correctionLevel.value]*1
     });
   });
   
