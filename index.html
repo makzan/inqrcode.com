@@ -14,10 +14,10 @@
 <div id="qrcode"></div>
 <input id="url">
 <select id="correction-level">
-  <option value="L">Low (7%)</option>
-  <option value="M" selected="selected">Medium (15%)</option>
-  <option value="Q">Quartile (25%)</option>
-  <option value="H">High (30%)</option>
+  <option value="1">Low (7%)</option>
+  <option value="0" selected="selected">Medium (15%)</option>
+  <option value="3">Quartile (25%)</option>
+  <option value="2">High (30%)</option>
 </select>
 
 <p>When you need a quick QRCode from URL. Just type <code>inqrcode.com/</code> before the URL. For example: <a href="//inqrcode.com/https://makzan.net">inqrcode.com/https://makzan.net</a>.</p>
@@ -42,6 +42,7 @@
   input.addEventListener('change',function(){
     location.href = "https://inqrcode.com/" + input.value;
   });
+
   correctionLevel.addEventListener('change',function(){
     qrcode.makeCode(url, {
       correctLevel: QRCode.CorrectLevel[correctionLevel.value]
