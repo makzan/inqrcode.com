@@ -18,7 +18,7 @@ exports.handler = async (event) => {
       margin: 1,
       color: { dark: '#000000', light: '#ffffff' }
     });
-    const png = lib.compositeLogo(qr, lib.getLogoBuffer(), 0.4);
+    const png = lib.compositeLogo(qr, lib.getLogoBuffer(), 0.3);
     return lib.pngResponse(png);
   } catch (err) {
     return lib.textResponse(400, 'Could not generate 2D barcode: ' + err.message);
