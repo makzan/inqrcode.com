@@ -1,5 +1,6 @@
-/gtin/img/*  /gtin-img.html  200
-/gtin/*      /gtin.html      200
-/img/*       /img.html       200
-/2d/*        /2d.html        200
-/*           /index.html     200
+/img/*         /.netlify/functions/img       200
+/gtin/img/*    /.netlify/functions/gtin-img  200
+/2d/img/*      /.netlify/functions/2d-img    200
+/gtin/*        /gtin.html                    200
+/2d/*          /2d.html                      200
+/*             /index.html                   200

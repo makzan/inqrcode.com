@@ -4,6 +4,7 @@
   "description": "Static QR code, GTIN barcode, and GS1 2D barcode service.",
   "dependencies": {
     "bwip-js": "^4.0.0",
+    "pngjs": "^5.0.0",
     "qrcode": "^1.5.4"
   }
 }

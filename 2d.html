@@ -13,6 +13,7 @@
 <p><code id="url-display"></code></p>
 <label>Domain: <input id="domain" value="id.gs1.org"></label>
 <p>Visit <code>inqrcode.com/2d/12345678901234</code> to generate a GS1 2D barcode for <code>https://id.gs1.org/01/12345678901234</code>. Add <code>?domain=id.gs1mo.org</code> to use a different domain.</p>
+<p>Use <code>?style=rounded</code> for rounded dots; the default is traditional square.</p>
 <hr>
 <p><small>Made in Macao by <a href="https://makzan.net">Makzan</a>. QR by <a href="https://github.com/kozakdenys/qr-code-styling">qr-code-styling</a>.</small></p>
 <script src="/qr-code-styling.js"></script>
@@ -22,6 +23,7 @@
   var params = new URLSearchParams(location.search);
   var domain = params.get("domain") || "id.gs1.org";
   var targetUrl = "https://" + domain + "/01/" + gtin;
+  var rounded = params.get("style") === "rounded";
 
   document.querySelector("#domain").value = domain;
   document.querySelector("#url-display").textContent = targetUrl;
@@ -33,10 +35,10 @@
     data: targetUrl,
     image: "/gs1-logo.png",
     qrOptions: { errorCorrectionLevel: "H" },
-    dotsOptions: { color: "#000000", type: "rounded" },
+    dotsOptions: { color: "#000000", type: rounded ? "rounded" : "square" },
     backgroundOptions: { color: "#ffffff" },
-    cornersSquareOptions: { type: "extra-rounded" },
-    cornersDotOptions: { type: "dot" },
+    cornersSquareOptions: { type: rounded ? "extra-rounded" : "square" },
+    cornersDotOptions: { type: rounded ? "dot" : "square" },
     imageOptions: {
       crossOrigin: "anonymous",
       margin: 8,
@@ -48,6 +50,9 @@
 
   var domainInput = document.querySelector("#domain");
   domainInput.addEventListener("change", function () {
-    location.href = location.origin + "/2d/" + gtin + "?domain=" + encodeURIComponent(domainInput.value);
+    var q = new URLSearchParams();
+    q.set("domain", domainInput.value);
+    if (rounded) q.set("style", "rounded");
+    location.href = location.origin + "/2d/" + gtin + "?" + q.toString();
   });
 </script>
