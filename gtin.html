@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>inQRCode.com - GTIN Barcode</title>
+<style>
+  body { font-family: -apple-system,sans-serif; padding: 2em; }
+  svg,img { max-width: 100%; height: auto; }
+  input { padding: .5em; width: 100%; }
+  #barcode { margin-bottom: 1em; text-align: center; }
+  code { word-break: break-all; }
+</style>
+<div id="barcode"></div>
+<input id="gtin" inputmode="numeric" placeholder="GTIN-13 or GTIN-14 number">
+<p>Enter a GTIN-13 (EAN-13) or GTIN-14 (ITF-14) number, or visit <code>inqrcode.com/gtin/1234567890123</code> directly. For image-only output use <code>inqrcode.com/gtin/img/1234567890123</code>.</p>
+<hr>
+<p><small>Made in Macao by <a href="https://makzan.net">Makzan</a>. Barcode by <a href="https://github.com/lindell/JsBarcode">JsBarcode</a>.</small></p>
+<script src="/JsBarcode.all.min.js"></script>
+<script>
+  var code = location.pathname.replace(/^\/gtin\//, "");
+  code = decodeURIComponent(code).replace(/\s+/g, "");
+  var input = document.querySelector("#gtin");
+  input.value = code;
+
+  function render(value) {
+    var container = document.querySelector("#barcode");
+    container.innerHTML = '<svg id="bc"></svg>';
+    if (!value) return;
+    var format = value.length >= 14 ? "ITF14" : "EAN13";
+    try {
+      JsBarcode("#bc", value, {
+        format: format,
+        width: 3,
+        height: 120,
+        fontSize: 20,
+        margin: 10,
+        textMargin: 6
+      });
+    } catch (e) {
+      container.innerHTML = "<p>Invalid " + format + " code</p>";
+    }
+  }
+
+  render(code);
+
+  input.addEventListener("input", function () {
+    render(input.value.replace(/\s+/g, ""));
+  });
+
+  input.addEventListener("change", function () {
+    var val = input.value.replace(/\s+/g, "");
+    if (val) location.href = location.origin + "/gtin/" + val;
+  });
+</script>

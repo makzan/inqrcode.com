@@ -26,29 +26,35 @@
   
 <script src="/qrcode.min.js"></script>
 
-<script>
-  var correctionLevel = document.querySelector("#correction-level");
+  <script>
+    var correctionLevel = document.querySelector("#correction-level");
 
-  var qrcode = new QRCode("qrcode", {
-    width: 512,
-    height: 512,
-    correctLevel: QRCode.CorrectLevel.M
-  });
-  var url = window.location.href.replace("https://inqrcode.com/","").replace("https://www.inqrcode.com/","").replace("https://inqrcode.netlify.com/","")
+    // Everything after the leading "/" is the URL to encode.
+    // pathname carries the target; search keeps its query string.
+    var url = location.pathname.replace(/^\//, "") + location.search;
 
-  qrcode.makeCode(url);
-  var input = document.querySelector("#url");
-  input.value = url;
-  input.addEventListener('change',function(){
-    location.href = "https://inqrcode.com/" + input.value;
-  });
+    var qrcode;
+    function makeQrcode(level) {
+      var el = document.querySelector("#qrcode");
+      el.innerHTML = "";
+      qrcode = new QRCode("qrcode", {
+        width: 512,
+        height: 512,
+        correctLevel: level
+      });
+      qrcode.makeCode(url);
+    }
 
-  correctionLevel.addEventListener('change',function(){
-    console.log("here", correctionLevel.value*1);
-    qrcode.clear();
-    qrcode.makeCode(url, {
-      correctLevel: correctionLevel.value*1
+    makeQrcode(QRCode.CorrectLevel.M);
+
+    var input = document.querySelector("#url");
+    input.value = url;
+    input.addEventListener('change', function () {
+      location.href = "https://inqrcode.com/" + input.value;
     });
-  });
+
+    correctionLevel.addEventListener('change', function () {
+      makeQrcode(correctionLevel.value * 1);
+    });
   
-</script>
+  </script>
