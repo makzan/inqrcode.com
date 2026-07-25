@@ -1,11 +1,11 @@
 # Pin the build Node version: without this Netlify falls back to an ancient
 # default (Node 8) and native deps like canvas fail to install.
-# AWS_LAMBDA_JS_RUNTIME pins the *functions* runtime: this site predates
-# Netlify's Node 22 default, so functions were still running an old Lambda
-# Node that cannot require() ES modules (ERR_REQUIRE_ESM from jsdom's deps).
+# NOTE: the functions runtime (AWS_LAMBDA_JS_RUNTIME) can NOT be set here —
+# Netlify only honors it from UI/CLI/API env vars. It must stay at nodejs22.x
+# or newer because jsdom's dependency tree contains ESM-only files that old
+# runtimes cannot require() (ERR_REQUIRE_ESM).
 [build.environment]
   NODE_VERSION = "22"
-  AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
 
 [functions]
   directory = "netlify/functions"

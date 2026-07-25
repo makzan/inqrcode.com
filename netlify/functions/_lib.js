@@ -7,7 +7,7 @@ function getRawUrl(event) {
   const headers = event.headers || {};
   const proto = headers['x-forwarded-proto'] || 'https';
   const host = headers.host || headers.Host || '';
-  return proto + '://' + host + (event.path || '') + (event.rawQuery ? '?' + event.rawQuery : '');
+  return proto + '://' + host + (event.path || '') + (event.rawQueryString ? '?' + event.rawQueryString : '');
 }
 
 // Everything in the URL after the first occurrence of `prefix`. Preserves the
