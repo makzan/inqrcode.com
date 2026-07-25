@@ -27,7 +27,7 @@ directly); serverless functions use Node `require`/`module.exports`.
 | `netlify/functions/_lib.js` | Shared helpers: URL parsing (`afterPrefix`), digit filtering, PNG/text response wrappers. The GS1 logo is embedded here as base64 (`LOGO_B64`, via `getLogoBuffer()`) so functions have no file-system dependency. `_` prefix prevents Netlify from treating it as a route. |
 | `_redirects` | Netlify routing: `/img/*`, `/gtin/img/*`, `/2d/img/*` → functions; `/gtin/*` → `gtin.html`; `/2d/*` → `2d.html`; catch-all `/*` → `index.html` (all status 200 rewrites). |
 | `netlify.toml` | Points the functions directory at `netlify/functions` and pins the build Node version (`NODE_VERSION = "22"`) — without the pin Netlify builds with an ancient default Node and native deps like `canvas` fail to install. |
-| `package.json` | Runtime deps only: `canvas`, `jsbarcode`, `jsdom`, `qr-code-styling`, `qrcode`. No scripts, no devDependencies. |
+| `package.json` | Runtime deps only: `canvas`, `jsbarcode`, `jsdom`, `qr-code-styling`, `qrcode`. No scripts, no devDependencies. `jsdom` is pinned to exactly `27.3.0`: `27.4.0`+ depends on `html-encoding-sniffer@6` → `@exodus/bytes`, which is ESM-only and crashes the CommonJS functions at runtime with `ERR_REQUIRE_ESM` on Netlify's Lambda Node runtime. Do not upgrade `jsdom` without checking that chain. |
 
 ## Routes
 
