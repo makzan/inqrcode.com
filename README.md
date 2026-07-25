@@ -28,6 +28,7 @@ high error-correction (level H).
 ### Image output (Netlify Functions)
 
 `/img/{url}`, `/gtin/img/{code}`, and `/2d/img/{14-digit}` return real `image/png`
-responses (Netlify Functions) so they can be embedded with `<img src>`. The `/2d/img`
-variant composites the GS1 logo onto a level-H QR. Run locally with `netlify dev`;
-dependencies: `qrcode`, `bwip-js`, `pngjs`.
+responses (Netlify Functions) so they can be embedded with `<img src>`. The image
+endpoints use the same libraries and options as the interactive pages (JsBarcode
+for GTIN, qr-code-styling for GS1 2D), so their output matches. Run locally with
+`netlify dev`; dependencies: `canvas`, `jsbarcode`, `jsdom`, `qr-code-styling`, `qrcode`.

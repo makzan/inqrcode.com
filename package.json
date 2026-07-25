@@ -3,8 +3,10 @@
   "private": true,
   "description": "Static QR code, GTIN barcode, and GS1 2D barcode service.",
   "dependencies": {
-    "bwip-js": "^4.0.0",
-    "pngjs": "^5.0.0",
+    "canvas": "^3.2.3",
+    "jsbarcode": "^3.12.3",
+    "jsdom": "^29.1.1",
+    "qr-code-styling": "^1.9.2",
     "qrcode": "^1.5.4"
   }
 }
