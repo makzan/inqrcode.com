@@ -26,7 +26,7 @@ directly); serverless functions use Node `require`/`module.exports`.
 | `netlify/functions/2d-img.js` | `/2d/img/{14-digit}` → QR PNG at error level H with centered GS1 logo (`qr-code-styling` + `canvas` + `jsdom`, same options as `2d.html`). |
 | `netlify/functions/_lib.js` | Shared helpers: URL parsing (`afterPrefix`), digit filtering, PNG/text response wrappers. The GS1 logo is embedded here as base64 (`LOGO_B64`, via `getLogoBuffer()`) so functions have no file-system dependency. `_` prefix prevents Netlify from treating it as a route. |
 | `_redirects` | Netlify routing: `/img/*`, `/gtin/img/*`, `/2d/img/*` → functions; `/gtin/*` → `gtin.html`; `/2d/*` → `2d.html`; catch-all `/*` → `index.html` (all status 200 rewrites). |
-| `netlify.toml` | Points the functions directory at `netlify/functions`. |
+| `netlify.toml` | Points the functions directory at `netlify/functions` and pins the build Node version (`NODE_VERSION = "22"`) — without the pin Netlify builds with an ancient default Node and native deps like `canvas` fail to install. |
 | `package.json` | Runtime deps only: `canvas`, `jsbarcode`, `jsdom`, `qr-code-styling`, `qrcode`. No scripts, no devDependencies. |
 
 ## Routes

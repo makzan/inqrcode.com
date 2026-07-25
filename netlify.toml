@@ -1,2 +1,7 @@
+# Pin the build Node version: without this Netlify falls back to an ancient
+# default (Node 8) and native deps like canvas fail to install.
+[build.environment]
+  NODE_VERSION = "22"
+
 [functions]
   directory = "netlify/functions"
