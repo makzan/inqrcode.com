@@ -37,7 +37,7 @@ exports.handler = async (event) => {
       cornersDotOptions: { type: 'square' },
       imageOptions: {
         margin: 8,
-        imageSize: 0.3,
+        imageSize: 0.25,
         hideBackgroundDots: true,
         saveAsBlob: true
       }
@@ -53,7 +53,7 @@ exports.handler = async (event) => {
     // same visual result as the browser, where hideBackgroundDots clears the
     // dots over the white background (logo rect + imageOptions.margin).
     const logo = await nodeCanvas.loadImage(logoBuffer);
-    const target = Math.min(canvas.width, canvas.height) * 0.3;
+    const target = Math.min(canvas.width, canvas.height) * 0.25;
     const scale = target / Math.max(logo.width, logo.height);
     const lw = logo.width * scale;
     const lh = logo.height * scale;
