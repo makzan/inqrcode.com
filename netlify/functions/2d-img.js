@@ -55,8 +55,14 @@ exports.handler = async (event) => {
     const logo = await nodeCanvas.loadImage(logoBuffer);
     const target = Math.min(canvas.width, canvas.height) * 0.25;
     const scale = target / Math.max(logo.width, logo.height);
-    const lw = logo.width * scale;
-    const lh = logo.height * scale;
+    const lw = Math.round(logo.width * scale);
+    const lh = Math.round(logo.height * scale);
+    // node-canvas rasterizes an SVG at its intrinsic size (72x61 here) on
+    // load, so upscaling that tiny bitmap made the logo blurry. Setting
+    // width/height on an SVG-backed image re-rasterizes the vector at that
+    // resolution instead — set them to the exact draw size and blit 1:1.
+    logo.width = lw;
+    logo.height = lh;
     const lx = (canvas.width - lw) / 2;
     const ly = (canvas.height - lh) / 2;
     const ctx = canvas.getContext('2d');
