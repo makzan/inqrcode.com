@@ -11,8 +11,8 @@
 </style>
 <div id="barcode"></div>
 <p><code id="url-display"></code></p>
-<label>Domain: <input id="domain" value="id.gs1.org"></label>
-<p>Visit <code>inqrcode.com/2d/12345678901234</code> to generate a GS1 2D barcode for <code>https://id.gs1.org/01/12345678901234</code>. Add <code>?domain=id.gs1mo.org</code> to use a different domain.</p>
+<label>Domain: <input id="domain" value="id.gs1mo.org"></label>
+<p>Visit <code>inqrcode.com/2d/12345678901234</code> to generate a GS1 2D barcode for <code>https://id.gs1mo.org/01/12345678901234</code>. Add <code>?domain=id.gs1.org</code> to use a different domain.</p>
 <p>Use <code>?style=rounded</code> for rounded dots; the default is traditional square.</p>
 <hr>
 <p><small>Made in Macao by <a href="https://makzan.net">Makzan</a>. QR by <a href="https://github.com/kozakdenys/qr-code-styling">qr-code-styling</a>.</small></p>
@@ -21,7 +21,7 @@
   var gtin = location.pathname.replace(/^\/2d\//, "");
   gtin = decodeURIComponent(gtin).replace(/\D/g, "");
   var params = new URLSearchParams(location.search);
-  var domain = params.get("domain") || "id.gs1.org";
+  var domain = params.get("domain") || "id.gs1mo.org";
   var targetUrl = "https://" + domain + "/01/" + gtin;
   var rounded = params.get("style") === "rounded";
 

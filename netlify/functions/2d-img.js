@@ -4,7 +4,7 @@ const QRCodeStyling = require('qr-code-styling');
 const lib = require('./_lib');
 
 // /2d/img/{14-digit} -> GS1 2D barcode PNG (QR @ level H + centered GS1 logo)
-// Supports ?domain= (default id.gs1.org)
+// Supports ?domain= (default id.gs1mo.org)
 // Uses the same library (qr-code-styling) and the same options as 2d.html so
 // the image output matches the interactive page exactly. Keep them in sync.
 exports.handler = async (event) => {
@@ -16,7 +16,7 @@ exports.handler = async (event) => {
     return lib.textResponse(400, 'Missing GTIN. Usage: /2d/img/{14-digit}');
   }
   const params = event.queryStringParameters || {};
-  const domain = params.domain || 'id.gs1.org';
+  const domain = params.domain || 'id.gs1mo.org';
   const targetUrl = 'https://' + domain + '/01/' + gtin;
   try {
     const logoBuffer = lib.getLogoBuffer();

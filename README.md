@@ -10,7 +10,7 @@ Source for inQRCode.com
 | `/gtin/{code}` | EAN-13 / ITF-14 barcode for a GTIN-13 or GTIN-14 number |
 | `/gtin/img/{code}` | EAN-13 / ITF-14 barcode as a PNG image via Netlify Function |
 | `/2d/{14-digit}` | GS1 2D barcode linking to `https://{domain}/01/{14-digit}` with GS1 logo |
-| `/2d/{14-digit}?domain=id.gs1mo.org` | Same, using a custom domain |
+| `/2d/{14-digit}?domain=id.gs1.org` | Same, using a custom domain |
 | `/2d/{14-digit}?style=rounded` | Rounded dots instead of the default square (interactive `/2d/` page only) |
 | `/2d/img/{14-digit}` | GS1 2D barcode (QR + logo) as a PNG image via Netlify Function |
 
@@ -21,7 +21,8 @@ powered by [JsBarcode](https://github.com/lindell/JsBarcode).
 
 ### GS1 2D barcodes
 
-Defaults to `https://id.gs1.org/01/{gtin}`. The QR code is styled with the GS1 logo
+Defaults to `https://id.gs1mo.org/01/{gtin}` (GS1 Macao resolver; always renders a
+product page). The QR code is styled with the GS1 logo
 centered, using [qr-code-styling](https://github.com/kozakdenys/qr-code-styling) and
 high error-correction (level H).
 

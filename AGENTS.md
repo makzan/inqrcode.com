@@ -35,7 +35,7 @@ directly); serverless functions use Node `require`/`module.exports`.
 - `/img/{url}` — QR code as PNG (function).
 - `/gtin/{code}` — EAN-13 / ITF-14 interactive page; `/gtin/img/{code}` for PNG.
 - `/2d/{14-digit}` — GS1 2D page linking to `https://{domain}/01/{gtin}`
-  (default domain `id.gs1.org`, override with `?domain=`); `?style=rounded`
+  (default domain `id.gs1mo.org`, override with `?domain=`); `?style=rounded`
   for rounded dots (interactive page only); `/2d/img/{14-digit}` for PNG.
 
 ## Build, run, and test commands
